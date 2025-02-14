@@ -50,4 +50,4 @@ rsconnect/
 
 # data files (ignore so its not uploaded)
 *.csv
-*.xls
+*.xlsx
