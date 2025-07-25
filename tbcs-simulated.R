@@ -53,7 +53,7 @@ sheet_names <- excel_sheets(tbcs18mo_codebook_english)
 view(sheet_names) #13 sheets
 
 #2 ways to change, use colnames(df) <- c("NewName1", "NewName2") or rename(df, NewName1 = OldName1, NewName2 = OldName2)
-rename(tbcs_simulated_data, #error in code saying that 'rename' cannot apply to an object of class "character"
+tbcs_simulated_data <- rename(tbcs_simulated_data, #error in code saying that 'rename' cannot apply to an object of class "character"
        participant_identificaiton = sampleid,
        taiwanese_year_of_birth = b_yy_06m,
        participant_sex = b_sex_06,
@@ -62,7 +62,8 @@ rename(tbcs_simulated_data, #error in code saying that 'rename' cannot apply to 
        singleton_or_twin = bb3_06m)
 
 colnames(tbcs_simulated_data) <- c("participant_identificaiton", "taiwanese_year_of_birth", "participant_sex")
-view(tbcs_simulated_data)                                                      
+view(tbcs_simulated_data)
+names(tbcs_simulated_data) #column names
                                                       c2am_06m
                                                       c2ad_06m
                                                       c2bm_06m
