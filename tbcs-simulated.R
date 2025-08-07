@@ -52,7 +52,7 @@ tbcs18mo_codebook_english <- "TBCS主問卷編碼簿(18個月大) ENG.xlsx"
 sheet_names <- excel_sheets(tbcs18mo_codebook_english)
 view(sheet_names) #13 sheets
 
-#2 ways to change, use colnames(df) <- c("NewName1", "NewName2") or rename(df, NewName1 = OldName1, NewName2 = OldName2)
+#change column names
 tbcs_simulated_data <- rename(tbcs_simulated_data, #error in code saying that 'rename' cannot apply to an object of class "character"
        participant_identificaiton = sampleid,
        taiwanese_year_of_birth = b_yy_06m,
@@ -61,7 +61,7 @@ tbcs_simulated_data <- rename(tbcs_simulated_data, #error in code saying that 'r
        birth_weight = bb2_06m,
        singleton_or_twin = bb3_06m,
        duration_drinking_breastmilk_or_formula = c2am_06m,	
-       breastfeeding_only = c2ad_06m,
+       breastfeeding_only_days = c2ad_06m,
        breastmilk_as_main_source_months = c2bm_06m,	
        breastmilk_as_main_source_days = c2bd_06m,	
        formula_as_main_source_months = c2cm_06m,
@@ -114,9 +114,45 @@ tbcs_simulated_data <- rename(tbcs_simulated_data, #error in code saying that 'r
        month_age_milestone_will_come_when_called = a6a_7_18m,	
        milestone_drink_from_cup_with_both_hands = a6_8_18m,	
        month_age_milestone_drink_from_cup_with_both_hands = a6a_8_18m)
-view(tbcs_simulated_data)
+
+#change numerical values to nonnumerical
+num_variables_to_nonnumerical <- c('participant_sex',
+                                   'gestational_age',
+                                   'birth_weight', 
+                                   'singleton_or_twin', 
+                                   'duration_drinking_breastmilk_or_formula',	
+                                   'parent_smoking_status',
+                                   'father_smoking_status_before_pregnancy',	
+                                   'mother_smoking_status_first_trimester',
+                                   'father_smoking_status_first_trimester',
+                                   'mother_smoking_status_second_trimester',
+                                   'father_smoking_status_second_trimester',
+                                   'mother_smoking_status',
+                                   'father_smoking_status',
+                                   'mother_alcohol_consumption_before_pregnancy',
+                                   'mother_alcohol_consumption_before_pregnancy_over_3x_per_week',
+                                   'mother_alcohol_consumption_during_pregnancy',	
+                                   'mother_alcohol_consumption_during_pregnancy_over_3x_per_week',	
+                                   'mother_alcohol_consumption',
+                                   'mother_alcohol_consumption_over_3x_per_week',
+                                   'father_alcohol_consumption',
+                                   'father_alcohol_consumption_over_3x_per_week',	
+                                   'average_monthly_income_past_year',	
+                                   'incense_burning_at_home',	
+                                   # m_age_bi
+                                   # m_edu_g3
+                                   'milestone_achievement',
+                                   'milestone_walk_stedily' ,
+                                   'milestone_clapping' ,
+                                   'milestone_scribble_with_pen',
+                                   'milestone_wave_goodbye', 
+                                   'milestone_call_a_parent',
+                                   'milestone_will_come_when_called',
+                                   'milestone_drink_from_cup_with_both_hands')
+tbcs_simulated_data[num_variables_to_nonnumerical] <- lapply(tbcs_simulated_data[num_variables_to_nonnumerical], factor)
+str(tbcs_simulated_data)
+
+#change taiwanese year to roman year
 
 #don't need father's age or edu?? (check lit)
 ## change levels
-
-#rename variables and run glimpse again and continue onto Part 4
