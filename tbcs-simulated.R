@@ -2,7 +2,6 @@ library(tidyverse)
 library(readxl)
 
 tbcs_simulated_data <- read_excel("tbcs_simulated_data.xlsx")
-View(tbcs_simulated_data)
 
 #use pipe for readability of code
 #use rename, easier way to change column names
@@ -15,12 +14,10 @@ glimpse(tbcs_simulated_data) #variable type, variable numbers, and observations
 str(tbcs_simulated_data) #variable type, variable numbers, and observations
 
 tbcs6mo_codebook_chinese <- read_excel("TBCS主問卷編碼簿(6個月大) CHN.xls")
-view(tbcs6mo_codebook_chinese)
 nrow(tbcs6mo_codebook_chinese) #149
 ncol(tbcs6mo_codebook_chinese) #6
 tbcs6mo_codebook_chinese <- "TBCS主問卷編碼簿(6個月大) CHN.xls"
 sheet_names_tbcs6mo_codebook_chinese <- excel_sheets(tbcs6mo_codebook_chinese) #get all sheet names
-view(sheet_names_tbcs6mo_codebook_chinese) #12 sheets
 data_list <- lapply(sheet_names_tbcs6mo_codebook_chinese, function (sheet){
   read_excel(tbcs6mo_codebook_chinese, sheet = sheet)
 })
@@ -29,20 +26,17 @@ tbcs6mo_codebook_chinese_sheetB <- data_list[[2]]
 
 
 tbcs6mo_codebook_english <- read_excel("TBCS主問卷編碼簿(6個月大) ENG.xlsx")
-view(tbcs6mo_codebook_english)
 nrow(tbcs6mo_codebook_english) #149
 ncol(tbcs6mo_codebook_english) #6
 tbcs6mo_codebook_english <- "TBCS主問卷編碼簿(6個月大) ENG.xlsx"
 sheet_names <- excel_sheets(tbcs6mo_codebook_english)
-view(sheet_names) #12 sheets
+
 
 tbcs18mo_codebook_chinese <- read_excel("TBCS主問卷編碼簿(18個月大) CHN.xls")
-view(tbcs18mo_codebook_chinese)
 nrow(tbcs18mo_codebook_chinese) #24
 ncol(tbcs18mo_codebook_chinese) #5
 tbcs18mo_codebook_chinese <- "TBCS主問卷編碼簿(18個月大) CHN.xls"
 sheet_names <- excel_sheets(tbcs18mo_codebook_chinese)
-view(sheet_names) #13 sheets
 
 tbcs18mo_codebook_english <- read_excel("TBCS主問卷編碼簿(18個月大) ENG.xlsx")
 view(tbcs18mo_codebook_english)
@@ -50,7 +44,6 @@ nrow(tbcs18mo_codebook_english) #24
 ncol(tbcs18mo_codebook_english) #5
 tbcs18mo_codebook_english <- "TBCS主問卷編碼簿(18個月大) ENG.xlsx"
 sheet_names <- excel_sheets(tbcs18mo_codebook_english)
-view(sheet_names) #13 sheets
 
 #change column names
 tbcs_simulated_data <- rename(tbcs_simulated_data, #error in code saying that 'rename' cannot apply to an object of class "character"
@@ -149,10 +142,21 @@ num_variables_to_nonnumerical <- c('participant_sex',
                                    'milestone_call_a_parent',
                                    'milestone_will_come_when_called',
                                    'milestone_drink_from_cup_with_both_hands')
+
 tbcs_simulated_data[num_variables_to_nonnumerical] <- lapply(tbcs_simulated_data[num_variables_to_nonnumerical], factor)
 str(tbcs_simulated_data)
+
+#convert id into string data not numerical
+tbcs_simulated_data$participant_identificaiton <- as.character(tbcs_simulated_data$participant_identificaiton)
+print(class(tbcs_simulated_data$participant_identificaiton)) #gives you strings only for participant_id
+str(tbcs_simulated_data) #gives you ALL the strings, check against the survey if these are all correct
+
+
+
+#treat unknowns as missing in data, also some numerical values have been changed to character like breastfeeding_only_days, how should I approach this, first insert missing values?
 
 #change taiwanese year to roman year
 
 #don't need father's age or edu?? (check lit)
 ## change levels
+#consider having a master script and breaking things down into different folders
