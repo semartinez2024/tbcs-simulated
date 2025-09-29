@@ -3,50 +3,16 @@ library(readxl)
 
 tbcs_simulated_data <- read_excel("tbcs_simulated_data.xlsx")
 
-#use pipe for readability of code
-#use rename, easier way to change column names
+#exploratory data analysis
 
 head(tbcs_simulated_data)
 tail(tbcs_simulated_data)
-nrow(tbcs_simulated_data)
+nrow(tbcs_simulated_data) #20172
 ncol(tbcs_simulated_data) #59
-glimpse(tbcs_simulated_data) #variable type, variable numbers, and observations
-str(tbcs_simulated_data) #variable type, variable numbers, and observations
-
-tbcs6mo_codebook_chinese <- read_excel("TBCS主問卷編碼簿(6個月大) CHN.xls")
-nrow(tbcs6mo_codebook_chinese) #149
-ncol(tbcs6mo_codebook_chinese) #6
-tbcs6mo_codebook_chinese <- "TBCS主問卷編碼簿(6個月大) CHN.xls"
-sheet_names_tbcs6mo_codebook_chinese <- excel_sheets(tbcs6mo_codebook_chinese) #get all sheet names
-data_list <- lapply(sheet_names_tbcs6mo_codebook_chinese, function (sheet){
-  read_excel(tbcs6mo_codebook_chinese, sheet = sheet)
-})
-tbcs6mo_codebook_chinese_sheetA <- data_list[[1]]
-tbcs6mo_codebook_chinese_sheetB <- data_list[[2]]
-
-
-tbcs6mo_codebook_english <- read_excel("TBCS主問卷編碼簿(6個月大) ENG.xlsx")
-nrow(tbcs6mo_codebook_english) #149
-ncol(tbcs6mo_codebook_english) #6
-tbcs6mo_codebook_english <- "TBCS主問卷編碼簿(6個月大) ENG.xlsx"
-sheet_names <- excel_sheets(tbcs6mo_codebook_english)
-
-
-tbcs18mo_codebook_chinese <- read_excel("TBCS主問卷編碼簿(18個月大) CHN.xls")
-nrow(tbcs18mo_codebook_chinese) #24
-ncol(tbcs18mo_codebook_chinese) #5
-tbcs18mo_codebook_chinese <- "TBCS主問卷編碼簿(18個月大) CHN.xls"
-sheet_names <- excel_sheets(tbcs18mo_codebook_chinese)
-
-tbcs18mo_codebook_english <- read_excel("TBCS主問卷編碼簿(18個月大) ENG.xlsx")
-view(tbcs18mo_codebook_english)
-nrow(tbcs18mo_codebook_english) #24
-ncol(tbcs18mo_codebook_english) #5
-tbcs18mo_codebook_english <- "TBCS主問卷編碼簿(18個月大) ENG.xlsx"
-sheet_names <- excel_sheets(tbcs18mo_codebook_english)
+str(tbcs_simulated_data)
 
 #change column names
-tbcs_simulated_data <- rename(tbcs_simulated_data, #error in code saying that 'rename' cannot apply to an object of class "character"
+tbcs_simulated_data <- rename(tbcs_simulated_data,
        participant_identificaiton = sampleid,
        taiwanese_year_of_birth = b_yy_06m,
        participant_sex = b_sex_06,
@@ -151,7 +117,9 @@ tbcs_simulated_data$participant_identificaiton <- as.character(tbcs_simulated_da
 print(class(tbcs_simulated_data$participant_identificaiton)) #gives you strings only for participant_id
 str(tbcs_simulated_data) #gives you ALL the strings, check against the survey if these are all correct
 
-
+head(tbcs_simulated_data$participant_sex)
+distribution_sex <- table(tbcs_simulated_data$participant_sex)
+mutate(tbcs_simulated_data$participant_sex, male=1, female=2)
 
 #treat unknowns as missing in data, also some numerical values have been changed to character like breastfeeding_only_days, how should I approach this, first insert missing values?
 
