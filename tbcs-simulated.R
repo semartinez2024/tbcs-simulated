@@ -5,11 +5,10 @@ tbcs_simulated_data <- read_excel("tbcs_simulated_data.xlsx")
 
 #exploratory data analysis
 
-head(tbcs_simulated_data)
-tail(tbcs_simulated_data)
-nrow(tbcs_simulated_data) #20172
-ncol(tbcs_simulated_data) #59
-str(tbcs_simulated_data)
+head(tbcs_simulated_data) #first 6 obs
+tail(tbcs_simulated_data) #last 6 obs
+dim(tbcs_simulated_data) #rows columns
+str(tbcs_simulated_data) #internal structure, includes class(), var name, var type, and var obs
 
 #change column names
 tbcs_simulated_data <- rename(tbcs_simulated_data,
@@ -54,9 +53,9 @@ tbcs_simulated_data <- rename(tbcs_simulated_data,
        father_alcohol_consumption_over_3x_per_week = h2a_d_6m,	
        average_monthly_income_past_year = h13_06m,	
        incense_burning_at_home = k3_06m,	
-      # m_age_bi codebook has Mage but idk what bi is supposed to indicate	
-      # m_edu_g3 codebook has Medu but idkk what g3 is supposed to indicate
-      # don't need father's age or edu?? (check lit)
+       mother_age = m_age_bi,
+       mother_education_level = m_edu_g3,
+      #don't need father's age or edu?? (check lit)
        milestone_achievement = a6_1_18m,	
        month_age_of_milestone_achievement = a6a_1_18m,	
        milestone_walk_stedily = a6_2_18m,	
@@ -74,43 +73,10 @@ tbcs_simulated_data <- rename(tbcs_simulated_data,
        milestone_drink_from_cup_with_both_hands = a6_8_18m,	
        month_age_milestone_drink_from_cup_with_both_hands = a6a_8_18m)
 
-#change numerical values to nonnumerical
-num_variables_to_nonnumerical <- c('participant_sex',
-                                   'gestational_age',
-                                   'birth_weight', 
-                                   'singleton_or_twin', 
-                                   'duration_drinking_breastmilk_or_formula',	
-                                   'parent_smoking_status',
-                                   'father_smoking_status_before_pregnancy',	
-                                   'mother_smoking_status_first_trimester',
-                                   'father_smoking_status_first_trimester',
-                                   'mother_smoking_status_second_trimester',
-                                   'father_smoking_status_second_trimester',
-                                   'mother_smoking_status',
-                                   'father_smoking_status',
-                                   'mother_alcohol_consumption_before_pregnancy',
-                                   'mother_alcohol_consumption_before_pregnancy_over_3x_per_week',
-                                   'mother_alcohol_consumption_during_pregnancy',	
-                                   'mother_alcohol_consumption_during_pregnancy_over_3x_per_week',	
-                                   'mother_alcohol_consumption',
-                                   'mother_alcohol_consumption_over_3x_per_week',
-                                   'father_alcohol_consumption',
-                                   'father_alcohol_consumption_over_3x_per_week',	
-                                   'average_monthly_income_past_year',	
-                                   'incense_burning_at_home',	
-                                   # m_age_bi
-                                   # m_edu_g3
-                                   'milestone_achievement',
-                                   'milestone_walk_stedily' ,
-                                   'milestone_clapping' ,
-                                   'milestone_scribble_with_pen',
-                                   'milestone_wave_goodbye', 
-                                   'milestone_call_a_parent',
-                                   'milestone_will_come_when_called',
-                                   'milestone_drink_from_cup_with_both_hands')
-
-tbcs_simulated_data[num_variables_to_nonnumerical] <- lapply(tbcs_simulated_data[num_variables_to_nonnumerical], factor)
+#check variable types (numerical, character, integer, logical)
 str(tbcs_simulated_data)
+taiwan_year_94 <- tbcs_simulated_data[tbcs_simulated_data$taiwanese_year_of_birth=='94'] #HERE
+view(tbcs_simulated_data$taiwanese_year_of_birth)
 
 #convert id into string data not numerical
 tbcs_simulated_data$participant_identificaiton <- as.character(tbcs_simulated_data$participant_identificaiton)
