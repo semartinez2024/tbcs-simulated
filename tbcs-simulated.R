@@ -7,12 +7,13 @@ tbcs_simulated_data <- read_excel("tbcs_simulated_data.xlsx")
 
 head(tbcs_simulated_data) #first 6 obs
 tail(tbcs_simulated_data) #last 6 obs
-dim(tbcs_simulated_data) #rows columns
+dim(tbcs_simulated_data) #rows and columns
 str(tbcs_simulated_data) #internal structure, includes class(), var name, var type, and var obs
 
 #change column names
+
 tbcs_simulated_data <- rename(tbcs_simulated_data,
-       participant_identificaiton = sampleid,
+       participant_identification = sampleid,
        taiwanese_year_of_birth = b_yy_06m,
        participant_sex = b_sex_06,
        gestational_age = bb1_06m,
@@ -55,7 +56,6 @@ tbcs_simulated_data <- rename(tbcs_simulated_data,
        incense_burning_at_home = k3_06m,	
        mother_age = m_age_bi,
        mother_education_level = m_edu_g3,
-      #don't need father's age or edu?? (check lit)
        milestone_achievement = a6_1_18m,	
        month_age_of_milestone_achievement = a6a_1_18m,	
        milestone_walk_stedily = a6_2_18m,	
@@ -64,7 +64,7 @@ tbcs_simulated_data <- rename(tbcs_simulated_data,
        month_age_milestone_clapping = a6a_3_18m,	
        milestone_scribble_with_pen = a6_4_18m,	
        month_age_milestone_scribble_with_pen = a6a_4_18m,	
-       milestone_wave_goodbye = a6_5_18m,	
+       milestone_wave_goodbye = a6_5_18m,
        month_age_milestone_wave_goodbye = a6a_5_18m,	
        milestone_call_a_parent = a6_6_18m,	
        month_age_milestone_call_a_parent = a6a_6_18m,	
@@ -73,24 +73,39 @@ tbcs_simulated_data <- rename(tbcs_simulated_data,
        milestone_drink_from_cup_with_both_hands = a6_8_18m,	
        month_age_milestone_drink_from_cup_with_both_hands = a6a_8_18m)
 
-#check variable types (numerical, character, integer, logical)
+#change variable types (numeric, character, factor, date-time)
+  #categorical data >> factor
+  #numerical data >> numerical vs integer (continuous vs discrete)
+tbcs_simulated_data$taiwanese_year_of_birth <- tbcs_simulated_data%>%
+  dplyr::select(taiwanese_year_of_birth)%>%
+  mutate(94+1911) #covert tw year to gregorian
+
+tbcs_simulated_data$participant_identification <- as.character(
+  tbcs_simulated_data$participant_identification) #id var converted from num to char var
+
+tbcs_simulated_data_all_num <- tbcs_simulated_data%>%mutate(
+  across(where(is.character), as.numeric))
+
+lapply(tbcs_simulated_data, as.numeric)
+sapply(tbcs_simulated_data, as.numeric)
 str(tbcs_simulated_data)
-taiwan_year_94 <- tbcs_simulated_data[tbcs_simulated_data$taiwanese_year_of_birth=='94'] #HERE
-view(tbcs_simulated_data$taiwanese_year_of_birth)
 
-#convert id into string data not numerical
-tbcs_simulated_data$participant_identificaiton <- as.character(tbcs_simulated_data$participant_identificaiton)
-print(class(tbcs_simulated_data$participant_identificaiton)) #gives you strings only for participant_id
-str(tbcs_simulated_data) #gives you ALL the strings, check against the survey if these are all correct
+tbcs_simulated_data <- sapply(tbcs_simulated_data, as.numeric)
 
-head(tbcs_simulated_data$participant_sex)
+#useful tools for modifying variable types
+str(df) #dataset structure
+unique(df$col) #check the levels of each variable
+mutate() #make new col with existing data
+as.integer()
+as.character()
+as.numeric()
+as.factor()
+
 distribution_sex <- table(tbcs_simulated_data$participant_sex)
-mutate(tbcs_simulated_data$participant_sex, male=1, female=2)
+mutate(tbcs_simulated_data$participant_sex, m=1, f=2)
 
+#goal: create descriptive stats table
 #treat unknowns as missing in data, also some numerical values have been changed to character like breastfeeding_only_days, how should I approach this, first insert missing values?
 
-#change taiwanese year to roman year
-
-#don't need father's age or edu?? (check lit)
-## change levels
 #consider having a master script and breaking things down into different folders
+#do other tbcs studies use father's edu, or only mother's edu?
