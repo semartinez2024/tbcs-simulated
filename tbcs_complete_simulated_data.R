@@ -2,6 +2,8 @@ install.packages("tidyverse" , "data.table")
 library(tidyverse)
 library(data.table)
 
+# Create TBCS df (all variables of interest) ------------------------------
+
 tbcs_6mo <- read.csv("v1.1/TBCS_6m_simulated.csv" , colClasses = list(character = "TOWN"))
 tbcs_18mo <- read.csv("v1.1/TBCS_18m_simulated.csv")
 
@@ -33,7 +35,8 @@ tbcs_6mo <- tbcs_6mo%>%
       incense_burning_at_home = K3)
        
 tbcs_18mo <- tbcs_18mo %>% 
-  rename(milestone_achievement = A6_1,	
+  rename(participant_identification = Sampleid,
+        milestone_achievement = A6_1,	
        month_age_of_milestone_achievement = A6a_1,	
        milestone_walk_steadily = A6_2,	
        month_age_milestone_walk_steadily = A6a_2,	
@@ -50,7 +53,47 @@ tbcs_18mo <- tbcs_18mo %>%
        milestone_drink_from_cup_with_both_hands = A6_8,	
        month_age_milestone_drink_from_cup_with_both_hands = A6a_8)
 
-tbcs_data <- tbcs_6mo %>% select(participant_identification, infant_sex, gestational_age, birth_weight, birth_type, maternal_age, maternal_edu, )
+combined_tbcs_data <- merge(tbcs_6mo, tbcs_18mo, by = "participant_identification")
+
+tbcs_data <- combined_tbcs_data %>% 
+              select(participant_identification,
+              infant_sex,
+              gestational_age,
+              birth_weight,
+              birth_type,
+              maternal_age,
+              maternal_edu,
+              exlcusively_breastfeeding_days,
+              mother_smoking_status_before_pregnancy,	#any Y = Y
+              father_smoking_status_before_pregnancy,	
+              mother_smoking_status_first_trimester,	
+              father_smoking_status_first_trimester,  ##8 is mose likely error, you should consider NA
+              mother_smoking_status_second_trimester,
+              father_smoking_status_second_trimester,	
+              mother_smoking_status_now,
+              father_smoking_status_now,
+              mother_alcohol_consumption_during_pregnancy, #1 = Y . combine with now over 3x wk
+              mother_alcohol_consumption_now_over_3x_per_week,	#1 = Y
+              average_monthly_income_past_year,
+              proximity_incinerator,
+              incense_burning_at_home,
+              milestone_achievement,	
+              month_age_of_milestone_achievement,	
+              milestone_walk_steadily,	
+              month_age_milestone_walk_steadily,	
+              milestone_clapping,	
+              month_age_milestone_clapping,	
+              milestone_scribble_with_pen,	
+              month_age_milestone_scribble_with_pen,	
+              milestone_wave_goodbye,
+              month_age_milestone_wave_goodbye,	
+              milestone_call_a_parent,	
+              month_age_milestone_call_a_parent,	
+              milestone_will_come_when_called,	
+              month_age_milestone_will_come_when_called,	
+              milestone_drink_from_cup_with_both_hands,	
+              month_age_milestone_drink_from_cup_with_both_hands)
+
 
 
 
