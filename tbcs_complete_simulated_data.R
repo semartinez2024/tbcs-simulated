@@ -2,8 +2,8 @@ install.packages("tidyverse" , "data.table")
 library(tidyverse)
 library(data.table)
 
-tbcs_6mo <- fread("TBCS_6m_simulated.csv" , colClasses = list(character = "TOWN"))
-tbcs_18mo <- read.csv("TBCS_18m_simulated.csv")
+tbcs_6mo <- read.csv("v1.1/TBCS_6m_simulated.csv" , colClasses = list(character = "TOWN"))
+tbcs_18mo <- read.csv("v1.1/TBCS_18m_simulated.csv")
 
 tbcs_6mo <- tbcs_6mo%>%
       rename(participant_identification = Sampleid,
@@ -33,25 +33,29 @@ tbcs_6mo <- tbcs_6mo%>%
       incense_burning_at_home = K3)
        
 tbcs_18mo <- tbcs_18mo %>% 
-  rename(milestone_achievement = A6_1_18m,	
-       month_age_of_milestone_achievement = A6a_1_18m,	
-       milestone_walk_steadily = A6_2_18m,	
-       month_age_milestone_walk_steadily = A6a_2_18m,	
-       milestone_clapping = A6_3_18m,	
-       month_age_milestone_clapping = A6a_3_18m,	
-       milestone_scribble_with_pen = a6_4_18m,	
-       month_age_milestone_scribble_with_pen = a6a_4_18m,	
-       milestone_wave_goodbye = a6_5_18m,
-       month_age_milestone_wave_goodbye = a6a_5_18m,	
-       milestone_call_a_parent = a6_6_18m,	
-       month_age_milestone_call_a_parent = a6a_6_18m,	
-       milestone_will_come_when_called = a6_7_18m,	
-       month_age_milestone_will_come_when_called = a6a_7_18m,	
-       milestone_drink_from_cup_with_both_hands = a6_8_18m,	
-       month_age_milestone_drink_from_cup_with_both_hands = a6a_8_18m)
-
-breastfeeding_over_30d <- mutate()
+  rename(milestone_achievement = A6_1,	
+       month_age_of_milestone_achievement = A6a_1,	
+       milestone_walk_steadily = A6_2,	
+       month_age_milestone_walk_steadily = A6a_2,	
+       milestone_clapping = A6_3,	
+       month_age_milestone_clapping = A6a_3,	
+       milestone_scribble_with_pen = A6_4,	
+       month_age_milestone_scribble_with_pen = A6a_4,	
+       milestone_wave_goodbye = A6_5,
+       month_age_milestone_wave_goodbye = A6a_5,	
+       milestone_call_a_parent = A6_6,	
+       month_age_milestone_call_a_parent = A6a_6,	
+       milestone_will_come_when_called = A6_7,	
+       month_age_milestone_will_come_when_called = A6a_7,	
+       milestone_drink_from_cup_with_both_hands = A6_8,	
+       month_age_milestone_drink_from_cup_with_both_hands = A6a_8)
 
 tbcs_data <- tbcs_6mo %>% select(participant_identification, infant_sex, gestational_age, birth_weight, birth_type, maternal_age, maternal_edu, )
 
-#source()
+
+
+#goal: create descriptive stats table
+#treat unknowns as missing in data, also some numerical values have been changed to character like breastfeeding_only_days, how should I approach this, first insert missing values?
+
+#consider having a master script and breaking things down into different folders
+#do other tbcs studies use father's edu, or only mother's edu?
