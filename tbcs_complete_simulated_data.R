@@ -1,12 +1,13 @@
-install.packages("tidyverse" , "data.table")
 library(tidyverse)
 library(data.table)
+library(finalfit)
 
 # Create TBCS df (all variables of interest) ------------------------------
 
-tbcs_6mo <- read.csv("v1.1/TBCS_6m_simulated.csv" , colClasses = list(character = "TOWN"))
-tbcs_18mo <- read.csv("v1.1/TBCS_18m_simulated.csv")
+tbcs_6mo <- fread("v1.1/TBCS_6m_simulated.csv" , colClasses = list(character = "TOWN")) #use fread() or read_csv they're faster
+tbcs_18mo <- fread("v1.1/TBCS_18m_simulated.csv")
 
+#rename variables from 6mo tbcs    
 tbcs_6mo <- tbcs_6mo%>%
       rename(participant_identification = Sampleid,
        infant_sex = B_SEX,
@@ -33,7 +34,8 @@ tbcs_6mo <- tbcs_6mo%>%
        #environmental factors
        proximity_incinerator = K1_1,
       incense_burning_at_home = K3)
-       
+
+#rename variables from 18mo tbcs       
 tbcs_18mo <- tbcs_18mo %>% 
   rename(participant_identification = Sampleid,
         milestone_achievement = A6_1,	
@@ -53,8 +55,10 @@ tbcs_18mo <- tbcs_18mo %>%
        milestone_drink_from_cup_with_both_hands = A6_8,	
        month_age_milestone_drink_from_cup_with_both_hands = A6a_8)
 
+#merge the 2 waves for tbcs
 combined_tbcs_data <- merge(tbcs_6mo, tbcs_18mo, by = "participant_identification")
 
+#selecting pertinent variables
 tbcs_data <- combined_tbcs_data %>% 
               select(participant_identification,
               infant_sex,
@@ -94,6 +98,8 @@ tbcs_data <- combined_tbcs_data %>%
               milestone_drink_from_cup_with_both_hands,	
               month_age_milestone_drink_from_cup_with_both_hands)
 
+
+# Clean Data (missing values, variable type, etc) -------------------------
 
 
 
