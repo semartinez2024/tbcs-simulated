@@ -33,13 +33,16 @@ tbcs_6mo <- tbcs_6mo %>% rename(participant_identification = Sampleid,
                             
                                #environmental factors
                                proximity_incinerator = K1_1,
-                              incense_burning_at_home = K3
+                              incense_burning_at_home = K3,
                               
                               #probiotic consumption
-                              )
+                              nutritional_supplement_consumption_6mo = C4,
+                              bifido_6mo = C4a4)
 
 #rename variables from 18mo tbcs       
 tbcs_18mo <- tbcs_18mo %>% rename(participant_identification = Sampleid,
+                                  
+                                  #neurdevelpoment milestone achievment
                                   milestone_achievement = A6_1,	
                                  month_age_of_milestone_achievement = A6a_1,	
                                  milestone_walk_steadily = A6_2,	
@@ -55,7 +58,11 @@ tbcs_18mo <- tbcs_18mo %>% rename(participant_identification = Sampleid,
                                  milestone_will_come_when_called = A6_7,	
                                  month_age_milestone_will_come_when_called = A6a_7,	
                                  milestone_drink_from_cup_with_both_hands = A6_8,	
-                                 month_age_milestone_drink_from_cup_with_both_hands = A6a_8)
+                                 month_age_milestone_drink_from_cup_with_both_hands = A6a_8,
+                                 
+                                 #probiotic consumption
+                                 nutritional_supplement_consumption_18mo = D4,
+                                 bifido_18mo = D4a4)
 
 #selecting pertinent variables from 6mo tbcs
 tbcs_6mo <- tbcs_6mo %>% select(participant_identification,
@@ -78,7 +85,9 @@ tbcs_6mo <- tbcs_6mo %>% select(participant_identification,
                                 mother_alcohol_consumption_now_over_3x_per_week,	#1 = Y
                                 average_monthly_income_past_year,
                                 proximity_incinerator,
-                                incense_burning_at_home)
+                                incense_burning_at_home,
+                                nutritional_supplement_consumption_6mo,
+                                bifido_6mo)
 
 #selecting pertinent variables from 18mo tbcs
 tbcs_18mo <- tbcs_18mo %>% select(participant_identification,
@@ -97,11 +106,13 @@ tbcs_18mo <- tbcs_18mo %>% select(participant_identification,
                                   milestone_will_come_when_called,	
                                   month_age_milestone_will_come_when_called,	
                                   milestone_drink_from_cup_with_both_hands,	
-                                  month_age_milestone_drink_from_cup_with_both_hands)
+                                  month_age_milestone_drink_from_cup_with_both_hands,
+                                  nutritional_supplement_consumption_18mo,
+                                  bifido_18mo)
 
 #join the 2 waves for tbcs, left_join ignores NA from 18mo tbcs, that is NA for milestone questions
 
-combined_tbcs_data <- left_join(tbcs_6mo, tbcs_18mo, by = "participant_identification") #left join chosen as it does not integrate NA for 18mo questions (milestones)
+combined_tbcs_data <- left_join(tbcs_6mo, tbcs_18mo, by = "participant_identification")
 
 # Clean Data (missing values, variable type, etc) -------------------------
 
