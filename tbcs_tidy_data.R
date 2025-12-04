@@ -9,15 +9,15 @@ tbcs_6mo <- fread("v1.1/TBCS_6m_simulated.csv" , colClasses = list(character = "
 tbcs_18mo <- fread("v1.1/TBCS_18m_simulated.csv")
 
 #rename variables from 6mo tbcs    
-tbcs_6mo <- tbcs_6mo %>% rename(participant_identification = Sampleid,
-                               infant_sex = B_SEX,
-                               gestational_age =BB1_L,
-                               birth_weight = BB2_L,
-                               birth_type = Aa28,
+tbcs_6mo <- tbcs_6mo %>% rename(participant_identification = Sampleid, #character
+                               infant_sex = B_SEX, #factor
+                               gestational_age =BB1_L, #factor
+                               birth_weight = BB2_L, #factor
+                               birth_type = Aa28, #factor
                                
                                #parental factors
-                               maternal_age = Mage,
-                               maternal_edu = Medu,
+                               maternal_age = Mage, #integer
+                               maternal_edu = Medu, #factor
                                exlcusively_breastfeeding_days = C2ad,
                                mother_smoking_status_before_pregnancy = H1aa,	#any Y = Y
                                father_smoking_status_before_pregnancy = H1ba,	
@@ -116,7 +116,8 @@ combined_tbcs_data <- left_join(tbcs_6mo, tbcs_18mo, by = "participant_identific
 
 # Clean Data (missing values, variable type, etc) -------------------------
 
-
+combined_tbcs_data$participant_idnetification <- as.character(combined_tbcs_data$participant_identification)
+combined_tbcs_data <- as.factor(combined_tbcs_data$infant_sex)
 
 #goal: create descriptive stats table
 #treat unknowns as missing in data, also some numerical values have been changed to character like breastfeeding_only_days, how should I approach this, first insert missing values?
