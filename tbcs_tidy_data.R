@@ -18,7 +18,7 @@ tbcs_6mo <- tbcs_6mo %>% rename(participant_identification = Sampleid, #characte
                                #parental factors
                                maternal_age = Mage, #integer
                                maternal_edu = Medu, #factor
-                               exlcusively_breastfeeding_days = C2ad,
+                               exlcusively_breastfeeding_days = C2ad, #integer
                                mother_smoking_status_before_pregnancy = H1aa,	#any Y = Y
                                father_smoking_status_before_pregnancy = H1ba,	
                                mother_smoking_status_first_trimester = H1ab,	
@@ -112,13 +112,56 @@ tbcs_18mo <- tbcs_18mo %>% select(participant_identification,
 
 #join the 2 waves for tbcs, left_join ignores NA from 18mo tbcs, that is NA for milestone questions
 
-combined_tbcs_data <- left_join(tbcs_6mo, tbcs_18mo, by = "participant_identification")
+combined_tbcs_data <- inner_join(tbcs_6mo, tbcs_18mo, by = "participant_identification")
 
 # Clean Data (missing values, variable type, etc) -------------------------
 
-combined_tbcs_data$participant_idnetification <- as.character(combined_tbcs_data$participant_identification)
-combined_tbcs_data <- as.factor(combined_tbcs_data$infant_sex)
+combined_tbcs_data <- as.character(combined_tbcs_data$participant_identification)
 
+combined_tbcs_data$participant_idnetification <- as.character(combined_tbcs_data$participant_identification)
+combined_tbcs_data$infant_sex <- as.factor(combined_tbcs_data$infant_sex)
+combined_tbcs_data$gestational_age <- as.factor(combined_tbcs_data$gestational_age)
+combined_tbcs_data$birth_weight <- as.factor(combined_tbcs_data$birth_weight)
+combined_tbcs_data$birth_type <-as.factor(combined_tbcs_data$birth_type)
+
+combined_tbcs_data$maternal_age <- as.integer(combined_tbcs_data$maternal_age)
+combined_tbcs_data$maternal_edu <- as.factor(combined_tbcs_data$maternal_edu)
+combined_tbcs_data$exlcusively_breastfeeding_days <- as.integer(combined_tbcs_data$exlcusively_breastfeeding_days)
+combined_tbcs_data$mother_smoking_status_before_pregnancy <- as.factor(combined_tbcs_data$mother_smoking_status_before_pregnancy)
+combined_tbcs_data$father_smoking_status_before_pregnancy <- as.factor(combined_tbcs_data$father_smoking_status_before_pregnancy)
+combined_tbcs_data$mother_smoking_status_first_trimester <- as.factor(combined_tbcs_data$mother_smoking_status_first_trimester)
+combined_tbcs_data$father_smoking_status_first_trimester <- as.factor(combined_tbcs_data$father_smoking_status_first_trimester)
+combined_tbcs_data$mother_smoking_status_second_trimester <- as.factor(combined_tbcs_data$mother_smoking_status_second_trimester)
+combined_tbcs_data$father_smoking_status_second_trimester <- as.factor(combined_tbcs_data$father_smoking_status_second_trimester)
+combined_tbcs_data$mother_smoking_status_now <- as.factor(combined_tbcs_data$mother_smoking_status_now)
+combined_tbcs_data$father_smoking_status_now <- as.factor(combined_tbcs_data$father_smoking_status_now)
+combined_tbcs_data$mother_alcohol_consumption_during_pregnancy <- as.factor(combined_tbcs_data$mother_alcohol_consumption_during_pregnancy)
+combined_tbcs_data$mother_alcohol_consumption_now_over_3x_per_week <- as.factor(combined_tbcs_data$mother_alcohol_consumption_now_over_3x_per_week)
+combined_tbcs_data$average_monthly_income_past_year <- as.factor(combined_tbcs_data$average_monthly_income_past_year)
+
+combined_tbcs_data$proximity_incinerator <- as.factor(combined_tbcs_data$proximity_incinerator)
+combined_tbcs_data$incense_burning_at_home <- as.factor(combined_tbcs_data$incense_burning_at_home)
+combined_tbcs_data$nutritional_supplement_consumption_6mo <- as.factor(combined_tbcs_data$nutritional_supplement_consumption_6mo)
+combined_tbcs_data$bifido_6mo <- as.factor(combined_tbcs_data$bifido_6mo)
+
+milestone_achievement,	#factor
+month_age_of_milestone_achievement,	
+milestone_walk_steadily,	#factor
+month_age_milestone_walk_steadily,	
+milestone_clapping,	#factor
+month_age_milestone_clapping,	
+milestone_scribble_with_pen,	#factor
+month_age_milestone_scribble_with_pen,	
+milestone_wave_goodbye, #factor
+month_age_milestone_wave_goodbye,	
+milestone_call_a_parent,	#factor
+month_age_milestone_call_a_parent,	
+milestone_will_come_when_called,	#factor
+month_age_milestone_will_come_when_called,	
+milestone_drink_from_cup_with_both_hands,	#factor
+month_age_milestone_drink_from_cup_with_both_hands,
+nutritional_supplement_consumption_18mo, #
+bifido_18mo)
 #goal: create descriptive stats table
 #treat unknowns as missing in data, also some numerical values have been changed to character like breastfeeding_only_days, how should I approach this, first insert missing values?
 
