@@ -1,11 +1,9 @@
-# Clean Data (missing values, variable type, etc) -------------------------
+# Clean Data -------------------------
 
 ## change variable types ----
 
 #demogrpahic variables
-combined_tbcs_data <- as.character(combined_tbcs_data$participant_identification)
-
-combined_tbcs_data$participant_idnetification <- as.character(combined_tbcs_data$participant_identification)
+combined_tbcs_data$participant_identification <- as.character(combined_tbcs_data$participant_identification)
 combined_tbcs_data$infant_sex <- as.factor(combined_tbcs_data$infant_sex)
 combined_tbcs_data$gestational_age <- as.factor(combined_tbcs_data$gestational_age)
 combined_tbcs_data$birth_weight <- as.factor(combined_tbcs_data$birth_weight)
@@ -31,11 +29,18 @@ combined_tbcs_data$average_monthly_income_past_year <- as.factor(combined_tbcs_d
 combined_tbcs_data$proximity_incinerator <- as.factor(combined_tbcs_data$proximity_incinerator)
 combined_tbcs_data$incense_burning_at_home <- as.factor(combined_tbcs_data$incense_burning_at_home)
 
-#probiotic consumption 6 months
+#probiotic consumption 6-mo and 18-mo
 combined_tbcs_data$nutritional_supplement_consumption_6mo <- as.factor(combined_tbcs_data$nutritional_supplement_consumption_6mo)
 combined_tbcs_data$bifido_6mo <- as.factor(combined_tbcs_data$bifido_6mo)
+combined_tbcs_data$nutritional_supplement_consumption_18mo <- as.factor(combined_tbcs_data$nutritional_supplement_consumption_18mo)
+combined_tbcs_data$bifido_18mo <- as.factor(combined_tbcs_data$bifido_18mo)
 
-#developmental milestone variables
+####create another variable to define as ever and never
+
+
+#####suggestion: do milestone in another file
+#developmental milestone variables >> managing data >> 90th percetile cutoff
+
 combined_tbcs_data$milestone_achievement <- as.factor(combined_tbcs_data$milestone_achievement)
 month_age_of_milestone_achievement,	#90th percentile cutoff
 combined_tbcs_data$milestone_walk_steadily <- as.factor(combined_tbcs_data$milestone_walk_steadily)
@@ -52,9 +57,7 @@ combined_tbcs_data$milestone_will_come_when_called <- as.factor(combined_tbcs_da
 month_age_milestone_will_come_when_called,	
 combined_tbcs_data$milestone_drink_from_cup_with_both_hands <- as.factor(combined_tbcs_data$milestone_drink_from_cup_with_both_hands)
 month_age_milestone_drink_from_cup_with_both_hands,
-nutritional_supplement_consumption_18mo, #
-bifido_18mo)
-#goal: create descriptive stats table
-#treat unknowns as missing in data, also some numerical values have been changed to character like breastfeeding_only_days, how should I approach this, first insert missing values?
 
-#do other tbcs studies use father's edu, or only mother's edu?
+## deal with missing values ----
+
+#treat unknowns as missing in data, also some numerical values have been changed to character like breastfeeding_only_days, how should I approach this, first insert missing values?
