@@ -1,8 +1,5 @@
 library(tidyverse)
 library(data.table)
-library(finalfit)
-library(arsenal)
-
 # Create TBCS df (all variables of interest) ------------------------------
 
 tbcs_6mo <- fread("v1.1/TBCS_6m_simulated.csv" , colClasses = list(character = "TOWN")) #use fread() or read_csv they're faster
