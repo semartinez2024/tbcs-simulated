@@ -59,7 +59,3 @@ combined_tbcs_data$month_age_milestone_wave_goodbye <- as.integer(combined_tbcs_
 combined_tbcs_data$month_age_milestone_call_a_parent <- as.integer(combined_tbcs_data$month_age_milestone_call_a_parent)
 combined_tbcs_data$month_age_milestone_will_come_when_called <- as.integer(combined_tbcs_data$month_age_milestone_will_come_when_called)
 combined_tbcs_data$month_age_milestone_drink_from_cup_with_both_hands <- as.integer(combined_tbcs_data$month_age_milestone_drink_from_cup_with_both_hands)
-
-## deal with missing values ----
-
-#treat unknowns as missing in data, also some numerical values have been changed to character like breastfeeding_only_days, how should I approach this, first insert missing values?
