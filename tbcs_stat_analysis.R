@@ -8,13 +8,33 @@ library(arsenal)
 
 #arsenal ----
 browseURL("https://mayoverse.github.io/arsenal/articles/tableby.html")
-dim(df) #see rows and colums number
-str() #see structure of variables 
-tablename <- tableby(stratifiedvariable ~ var1 + var2, data=df) 
-  #create simple table (name it whatever) stratified by a variable
-    ##stratified variable will show at the top of the table, then var1 and var2 will show on the left side
-summary(tablename, text = TRUE)
-  #take a quick look at the table you made, use text = TRUE so that it looks nicer
+dim(combined_tbcs_data) #see rows and colums number
+str(combined_tbcs_data) #see structure of variables 
+
+table_descriptive_data <- tableby()
+
+table_probiotic_6mo_side_milestones <- tableby(bifido_6mo ~ milestone_achievement 
+                               + milestone_walk_steadily 
+                               + milestone_clapping
+                               + milestone_scribble_with_pen
+                               + milestone_wave_goodbye
+                               + milestone_call_a_parent
+                               + milestone_will_come_when_called
+                               + milestone_drink_from_cup_with_both_hands
+                               , data = combined_tbcs_data)
+table_probiotic_6mo_side_probiotics <- tableby(list(milestone_achievement, 
+                               milestone_walk_steadily, 
+                               milestone_clapping,
+                               milestone_scribble_with_pen,
+                               milestone_wave_goodbye,
+                               milestone_call_a_parent,
+                               milestone_will_come_when_called,
+                               milestone_drink_from_cup_with_both_hands) ~ bifido_6mo
+                               , data = combined_tbcs_data)
+summary(table_probiotic_6mo_side_milestones, text = TRUE) ##this table looks more concise but the explanatory variable is on the top (row) and the dependent variable is on the left side
+
+summary(table_probiotic_6mo_side_probiotics, text = TRUE)
+
 tableby.control() #test distrib of IV across levels of categorical variables
 
 #finalfit ----
