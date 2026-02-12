@@ -2,8 +2,8 @@ library(tidyverse)
 library(data.table)
 # Create TBCS df (all variables of interest) ------------------------------
 
-tbcs_6mo <- fread("v1.1/TBCS_6m_simulated.csv" , colClasses = list(character = "TOWN")) #use fread() or read_csv they're faster
-tbcs_18mo <- fread("v1.1/TBCS_18m_simulated.csv")
+tbcs_6mo <- fread("v1.4/TBCS_6m_simulated.csv" , colClasses = list(character = "TOWN")) #use fread() or read_csv they're faster
+tbcs_18mo <- fread("v1.4/TBCS_18m_simulated.csv")
 
 ## rename variables from 6mo tbcs   ------ 
 tbcs_6mo <- tbcs_6mo %>% rename(participant_identification = Sampleid, #character
