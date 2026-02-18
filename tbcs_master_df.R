@@ -87,7 +87,7 @@ tbcs_6mo <- tbcs_6mo %>% select(participant_identification,
                                 bifido_6mo)
 
 ## selecting pertinent variables from 18mo tbcs ----
-tbcs_18mo <- tbcs_18mo %>% select(participant_identification,
+tbcs_18mo <- tbcs_18mo %>% select(participant_identification,  #8 milestones
                                   milestone_achievement,
                                   month_age_of_milestone_achievement,	
                                   milestone_walk_steadily,	
