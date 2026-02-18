@@ -15,17 +15,6 @@ browseURL("https://r4ds.hadley.nz/missing-values.html") #missing values chapter
 
 #treat unknowns as missing in data, also some numerical values have been changed to character like breastfeeding_only_days, how should I approach this, first insert missing values?
 
-## deal with independent variable missing values----
-
-#probiotic consumption 6-mo
-combined_tbcs_data <- recode(combined_tbcs_data$nutritional_supplement_consumption_6mo, 9 = NA)  #0 = no, 1 = have, 9 = NA (refuse to answer, don't know, don't remember)
-bifido_6mo #0 = no, 1 = have, 9 = NA
-
-#probiotics 18 mo
-nutritional_supplement_consumption_18mo = D4 #0 = no, 1 = have, 8 = NA, 9 = unknown
-bifido_18mo = D4a4 #0 = no, 1 = have, 8 = NA, 9 = unknown
-
-####create another variable to define as ever and never
 #####suggestion: do milestone in another file
 
 ## deal with dependent variable missing values ----
@@ -39,6 +28,7 @@ milestone_wave_goodbye = A6_5, # 0 = not yet, 1 = meeting, 2 =  no idea
 milestone_call_a_parent = A6_6,	# 0 = not yet, 1 = meeting, 2 =  no idea
 milestone_will_come_when_called = A6_7,	# 0 = not yet, 1 = meeting, 2 =  no idea
 milestone_drink_from_cup_with_both_hands = A6_8,	# 0 = not yet, 1 = meeting, 2 =  no idea
+
 
 na_if(combined_tbcs_data$month_age_of_milestone_achievement, 8888)
 na_if(combined_tbcs_data$month_age_of_milestone_achievement, 9999)
@@ -55,8 +45,17 @@ na_if(combined_tbcs_data$month_age_milestone_call_a_parent, 9999)
 na_if(combined_tbcs_data$month_age_milestone_will_come_when_called, 8888)
 na_if(combined_tbcs_data$month_age_milestone_will_come_when_called, 9999)
 na_if(combined_tbcs_data$month_age_milestone_drink_from_cup_with_both_hands, 8888)
-na_if(combined_tbcs_data$month_age_milestone_drink_from_cup_with_both_hands, 9999) #16 lines for 8 milestones x2, the rest of the month ages are integers (whole numbers)
-
+na_if(combined_tbcs_data$month_age_milestone_drink_from_cup_with_both_hands, 9999) #16 lines for 8 milestones x2, the rest of the month ages are integers (whole nu)
+      
+      ## change to 90th percentile!!!!!
+      month_age_of_milestone_achievement = A6a_1,	# whole number, 8888 = not applicable, 9999 = have no idea
+      month_age_milestone_walk_steadily = A6a_2,	# whole number, 8888 = not applicable, 9999 = have no idea
+      month_age_milestone_clapping = A6a_3,	# whole number, 8888 = not applicable, 9999 = have no idea
+      month_age_milestone_scribble_with_pen = A6a_4,	# whole number, 8888 = not applicable, 9999 = have no idea
+      month_age_milestone_wave_goodbye = A6a_5,	# whole number, 8888 = not applicable, 9999 = have no idea
+      month_age_milestone_call_a_parent = A6a_6,	# whole number, 8888 = not applicable, 9999 = have no idea
+      month_age_milestone_will_come_when_called = A6a_7,	# whole number, 8888 = not applicable, 9999 = have no idea
+      month_age_milestone_drink_from_cup_with_both_hands = A6a_8,# whole number, 8888 = not applicable, 9999 = have no idea
 
       #weird values for dv months >> 0, 1, 2 months for achieving milestones???
       unique(combined_tbcs_data$month_age_of_milestone_achievement)
