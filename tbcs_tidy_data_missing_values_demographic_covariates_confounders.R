@@ -1,3 +1,5 @@
+#Clean Data
+
 ##demographic variables ----
 combined_tbcs_data$participant_identification <- as.character(combined_tbcs_data$participant_identification)
 combined_tbcs_data$infant_sex <- as.factor(combined_tbcs_data$infant_sex)
@@ -13,7 +15,7 @@ combined_tbcs_data$birth_type <-as.factor(combined_tbcs_data$birth_type)
 #maternal variables
 combined_tbcs_data$maternal_age <- as.integer(combined_tbcs_data$maternal_age)
 combined_tbcs_data$maternal_edu <- as.factor(combined_tbcs_data$maternal_edu)
-combined_tbcs_data$exlcusively_breastfeeding_days <- as.integer(combined_tbcs_data$exlcusively_breastfeeding_days)
+combined_tbcs_data$exlcusively_breastfeeding_days <- as.integer(combined_tbcs_data$exlcusively_breastfeeding_days) #treat unknowns as missing in data, also some numerical values have been changed to character like breastfeeding_only_days, how should I approach this, first insert missing values?
 combined_tbcs_data$mother_smoking_status_before_pregnancy <- as.factor(combined_tbcs_data$mother_smoking_status_before_pregnancy)
 combined_tbcs_data$father_smoking_status_before_pregnancy <- as.factor(combined_tbcs_data$father_smoking_status_before_pregnancy)
 combined_tbcs_data$mother_smoking_status_first_trimester <- as.factor(combined_tbcs_data$mother_smoking_status_first_trimester)
