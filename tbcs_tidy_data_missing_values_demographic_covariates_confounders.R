@@ -35,34 +35,26 @@ na_if(combined_tbcs_data$exlcusively_breastfeeding_days,
                             na_if(combined_tbcs_data$mother_smoking_status_first_trimester,
                             #0. No1.have9.NA
                             na_if(combined_tbcs_data$father_smoking_status_first_trimester,
-na_if(combined_tbcs_data$mother_smoking_status_second_trimester,
-na_if(combined_tbcs_data$father_smoking_status_second_trimester,
-na_if(combined_tbcs_data$mother_smoking_status_now,
-na_if(combined_tbcs_data$father_smoking_status_now,
-na_if(combined_tbcs_data$mother_alcohol_consumption_during_pregnancy,
-na_if(combined_tbcs_data$mother_alcohol_consumption_now_over_3x_per_week,
-na_if(combined_tbcs_data$average_monthly_income_past_year,
-      
-      #parental factors
-      maternal_age = Mage, #integer
-      maternal_edu = Medu, #factor
-      exlcusively_breastfeeding_days = C2ad, #integer
-      mother_smoking_status_before_pregnancy = H1aa,	#any Y = Y
-      father_smoking_status_before_pregnancy = H1ba,	
-      mother_smoking_status_first_trimester = H1ab,	
-      father_smoking_status_first_trimester = H1bb,  ##8 is mose likely error, you should consider NA
-      mother_smoking_status_second_trimester = H1ac,
-      father_smoking_status_second_trimester = H1bc,	
-      mother_smoking_status_now = H1ad,
-      father_smoking_status_now = H1bd,
-      mother_alcohol_consumption_during_pregnancy = H2_b, #1 = Y . combine with now over 3x wk
-      mother_alcohol_consumption_now_over_3x_per_week = H2a_c,	#1 = Y
-      average_monthly_income_past_year = H13,
+                                  
+#0. No1.have9.NA                                 
+na_if(combined_tbcs_data$mother_smoking_status_second_trimester, H1ac
+#0. No1.have9.NA      
+na_if(combined_tbcs_data$father_smoking_status_second_trimester, H1bc
+#0. No1.have9.NA 
+na_if(combined_tbcs_data$mother_smoking_status_now,H1ad
+#0. No1.have9.NA 
+na_if(combined_tbcs_data$father_smoking_status_now, H1bd
+#0. No1.have9.NA       
+na_if(combined_tbcs_data$mother_alcohol_consumption_during_pregnancy, H2_b
+#0. No1.have9.NA      
+na_if(combined_tbcs_data$mother_alcohol_consumption_now_over_3x_per_week, H2a_c
+#1. 3 Less than 10,000 yuantwenty three10,000 yuan～5 Less than 10,000 yuan3. 510,000 yuan～7 Less than 10,000 yuan4. 710,000 yuan～10 Less than 10,000 yuan5. 1010,000 yuan～15 Less than 10,000 yuan6. 1510,000 yuan～20 Less than 10,000 yuan7. 20 More than 10,000 yuan99.Unknown, unclear, don't remember, don't know, can't say, refuse to answer or indicate with "?"      
+na_if(combined_tbcs_data$average_monthly_income_past_year, H13
+
       
 #environmental variables
-na_if(combined_tbcs_data$proximity_incinerator,
-na_if(combined_tbcs_data$incense_burning_at_home,
+#0. No1.have9.NA
+na_if(combined_tbcs_data$proximity_incinerator, K1_1
+#0. No1. Yes, we burn incense on festivals or on the first and fifteenth day of the lunar month.2. Yes, I burn incense almost every morning and evening.3.Yes, I burn incense almost every day from morning till night.9.Not applicable, unknown, unclear, don’t remember, don’t know, can’t say, refuse to answer or indicate with “?”
+na_if(combined_tbcs_data$incense_burning_at_home, K3
       
-      #environmental factors
-      proximity_incinerator = K1_1,
-      incense_burning_at_home = K3,
