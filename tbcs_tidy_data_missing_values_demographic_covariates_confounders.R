@@ -10,7 +10,14 @@
   #birth_weight already has NA
   na_if(combined_tbcs_data$birth_type, "9")
 
+                                                browseURL("https://www.google.com/search?q=how+to+change+values+in+data+frame+using+na_if+in+r&oq=how+to+change+values+in+data+frame+using+na_if+in+r&gs_lcrp=EgZjaHJvbWUyCwgAEEUYChg5GKABMgkIARAhGAoYoAEyCQgCECEYChigATIHCAMQIRirAjIHCAQQIRiPAjIHCAUQIRiPAtIBCTEyODY1ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8")
                                                 combined_tbcs_data$birth_type <-   na_if(combined_tbcs_data$birth_type, "9")
+                                                #two codes that could be useful:
+                                                  # library(dplyr)
+                                                    #df <- df %>% mutate(column_name = na_if(column_name, "unknown"))
+                                                  # Replaces "999" with NA in columns 'val1' and 'val2'
+                                                    #df <- df %>% mutate(across(c(val1, val2), ~na_if(., 999)))
+                                                
                                     
 ###maternal variables ----
   #maternal_age already has NA
