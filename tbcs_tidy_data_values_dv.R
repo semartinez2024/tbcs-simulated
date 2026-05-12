@@ -22,5 +22,6 @@ quantile(combined_tbcs_data$month_age_milestone_call_a_parent, 0.9, na.rm = TRUE
 quantile(combined_tbcs_data$month_age_milestone_will_come_when_called, 0.9, na.rm = TRUE) #14
 quantile(combined_tbcs_data$month_age_milestone_drink_from_cup_with_both_hands, 0.9, na.rm = TRUE) #17
 
-#mutate to new variable (above and below 90th percentile)
+#mutate to new variable (below 90th percentile is MET, above 90th percentile is NOT MET i.e., delayed) ----
+
 #rename dependent variable 'meeting' and 'not yet' values ----
