@@ -23,5 +23,22 @@ quantile(combined_tbcs_data$month_age_milestone_will_come_when_called, 0.9, na.r
 quantile(combined_tbcs_data$month_age_milestone_drink_from_cup_with_both_hands, 0.9, na.rm = TRUE) #17
 
 #mutate to new variable (below 90th percentile is MET, above 90th percentile is NOT MET i.e., delayed) ----
+combined_tbcs_data <- combined_tbcs_data %>% 
+  mutate(under_90 = if_else(month_age_of_milestone_achievement < quantile(month_age_of_milestone_achievement, 0.9), "MET" , "NOT MET"))
+combined_tbcs_data$month_age_milestone_walk_steadily <-
+combined_tbcs_data$month_age_milestone_clapping <-
+combined_tbcs_data$month_age_milestone_scribble_with_pen <-
+combined_tbcs_data$month_age_milestone_wave_goodbye <-
+combined_tbcs_data$month_age_milestone_call_a_parent <-
+combined_tbcs_data$month_age_milestone_will_come_when_called <-
+combined_tbcs_data$month_age_milestone_drink_from_cup_with_both_hands <-
+
+combined_tbcs_data <- combined_tbcs_data %>% 
+  mutate (milestone = case_when((bifido_6mo == 1)&(bifido_18mo == 1) ~ "ever",
+                                (bifido_6mo == 0)&(bifido_18mo == 1) ~ "ever",
+                                (bifido_6mo == 1)&(bifido_18mo == 0) ~ "ever",
+                                (bifido_6mo == 1)&(bifido_18mo == 9) ~ "ever",
+                                (bifido_6mo == 9)&(bifido_18mo == 1) ~ "ever",
+                                (bifido_6mo == 0)&(bifido_18mo == 0) ~ "never"))
 
 #rename dependent variable 'meeting' and 'not yet' values ----
