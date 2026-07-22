@@ -11,7 +11,7 @@
     #maternal_edu already has NA
     #exlcusively_breastfeeding_days already has NA 
   ###environmental variables ----
-    #all (the two in thisb category) needed manipulating
+    #all (the two in this category) needed manipulating
 combined_tbcs_data <- combined_tbcs_data %>% mutate (birth_type = na_if(birth_type, "9"),
                                                      mother_smoking_status_before_pregnancy = na_if(mother_smoking_status_before_pregnancy, "9"),
                                                      father_smoking_status_before_pregnancy = na_if(father_smoking_status_before_pregnancy, "9"),
@@ -26,17 +26,3 @@ combined_tbcs_data <- combined_tbcs_data %>% mutate (birth_type = na_if(birth_ty
                                                      average_monthly_income_past_year = na_if(average_monthly_income_past_year, "99"),
                                                      proximity_incinerator = na_if(proximity_incinerator, "9"),
                                                      incense_burning_at_home = na_if(incense_burning_at_home, "9"))
-                                            
-                              ##LINES THAT NEED TO BE FIXED
-                              
-                              #0. No1.have9.NA >> no 0??? so every smoked or the 9s were suppose to be 0
-                              #na_if(combined_tbcs_data$father_smoking_status_before_pregnancy,)
-
-                              #0. No1.have9.NA >> no 0??? so every smoked or the 9s were suppose to be 0
-                              #na_if(combined_tbcs_data$father_smoking_status_first_trimester,)
-
-                              #0. No1.have9.NA  >> no 0??? so every smoked or the 9s were suppose to be 0   
-                              #na_if(combined_tbcs_data$father_smoking_status_second_trimester, H1bc
-  
-                              #0. No1.have9.NA >> no 0??? so every smoked or the 9s were suppose to be 0 
-                              #na_if(combined_tbcs_data$father_smoking_status_now, H1bd
