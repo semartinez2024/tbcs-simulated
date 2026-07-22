@@ -20,6 +20,8 @@ table_demographic_data <- tableby(bifido_6mo ~ combined_tbcs_data$infant_sex
                                   + combined_tbcs_data$birth_type
                                   , data = combined_tbcs_data)
 summary(table_demographic_data, text = TRUE)
+
+#table_demographic_data > write.csv("filepath.csv") use this code to export cvs file
                        
 
                          #maternal variables
@@ -68,7 +70,7 @@ summary(table_probiotics_18mo, text = TRUE)
 
 tableby.control(table_probiotic_6mo) #test distrib of IV across levels of categorical variables
 
-#finalfit ----#ftable_probiotic_6moinalfit ----
+#finalfit ----#ftable_probiotic_6moinalfit ---- use finalfit to do regression model
 browseURL("https://finalfit.org/articles/all_tables_examples.html")
 explanatory = c("var1", "var2", "var3")
 dependent = "var4"
