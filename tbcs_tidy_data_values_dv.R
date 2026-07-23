@@ -39,14 +39,12 @@ combined_tbcs_data <- combined_tbcs_data %>%
   mutate(month_age_milestone_drink_from_cup_with_both_hands = case_when(month_age_milestone_drink_from_cup_with_both_hands >= drink_milestone_90 ~ "0",
                                                        month_age_milestone_drink_from_cup_with_both_hands <= drink_milestone_90 ~ "1"))
 
-
-
-combined_tbcs_data <- combined_tbcs_data %>% 
-  mutate (milestone = case_when((bifido_6mo == 1)&(bifido_18mo == 1) ~ "ever",
-                                (bifido_6mo == 0)&(bifido_18mo == 1) ~ "ever",
-                                (bifido_6mo == 1)&(bifido_18mo == 0) ~ "ever",
-                                (bifido_6mo == 1)&(bifido_18mo == 9) ~ "ever",
-                                (bifido_6mo == 9)&(bifido_18mo == 1) ~ "ever",
-                                (bifido_6mo == 0)&(bifido_18mo == 0) ~ "never"))
-
-#rename dependent variable 'meeting' and 'not yet' values ----
+#find proportions of delayed-----
+proportions(table(combined_tbcs_data$month_age_of_milestone_achievement))
+proportions(table(combined_tbcs_data$month_age_milestone_walk_steadily))
+proportions(table(combined_tbcs_data$month_age_milestone_clapping))
+proportions(table(combined_tbcs_data$month_age_milestone_scribble_with_pen))
+proportions(table(combined_tbcs_data$month_age_milestone_wave_goodbye))
+proportions(table(combined_tbcs_data$month_age_milestone_call_a_parent))
+proportions(table(combined_tbcs_data$month_age_milestone_will_come_when_called))
+proportions(table(combined_tbcs_data$month_age_milestone_drink_from_cup_with_both_hands))
