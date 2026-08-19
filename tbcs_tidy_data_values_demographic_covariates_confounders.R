@@ -1,25 +1,29 @@
-#Clean Data
+#Clean Data #### HOW DO YOU WANT TO DEMOGRPAHIC DATA TO APPEAR IN THE TABLE
 
-####ASK YOURSELF HOW YOU WANT TO DEMOGRPAHIC DATA TO APPEAR IN THE TABLE
+#demographic variables ----
 
-##demographic variables ----
 #participant identification doesn't need NA, that was already fixed when using join() in df script
-#2= female, 1 = male, NA  
-combined_tbcs_data$infant_sex
-      
-      
-##covariates/confounders ----
-      
-  #infant variables
-      #3 = 37wk+, 2 = 28-37wk, 1 = less than 28wk, NA
-      combined_tbcs_data$gestational_age
-      # 2. 1500-2499 grams 3. 2500-3499 grams 4. More than 3500 grams, NA
-      combined_tbcs_data$birth_weight
-      #1. Single pregnancy 2. Twin pregnancy or more, NA, 9      
-      combined_tbcs_data$birth_type
-                  
-                  
-  #maternal variables
+#infant sex  
+  #2= female, 1 = male, NA
+  females_total <- sum(combined_tbcs_data$infant_sex == "2", na.rm = TRUE)      
+
+#covariates/confounders ----
+##infant variables ----
+  
+#gestational age
+  #3 = 37wk+, 2 = 28-37wk, 1 = less than 28wk, NA
+  browseURL("https://www.nichd.nih.gov/health/topics/preterm/conditioninfo") ## for definition of premature birth ie less than 37 weeks     
+  term_birth_total <- sum(combined_tbcs_data$gestational_age == "3", na.rm = TRUE)
+#birth weight  
+  browseURL("https://www.who.int/data/gho/indicator-metadata-registry/imr-details/low-birthweight-(-newborns-who-weigh-2.5kg)") ## def for low birth weight (LBW) ie less than 2500g
+  #1. Less than 1500 grams 2. 1500-2499 grams 3. 2500-3499 grams 4. More than 3500 grams, NA >> is distribution the same between the different groups? >> what's the stats test you'll use for this? finalfit will do this for you
+  LBW_total <- sum(combined_tbcs_data$birth_weight == "2", na.rm = TRUE) + 
+                  sum(combined_tbcs_data$birth_weight == "1", na.rm = TRUE)
+#single vs twins
+  #1. Single pregnancy 2. Twin pregnancy or more, NA, 9      
+  single_baby_total <- sum(combined_tbcs_data$birth_type == "1", na.rm = TRUE)
+                  7
+##maternal variables ----
       #integer or NA
       combined_tbcs_data$maternal_age
       #1. Junior high school and below 2. Senior high school 3. College and above, NA
@@ -51,7 +55,7 @@ combined_tbcs_data$infant_sex
       combined_tbcs_data$average_monthly_income_past_year
                                                                                                       
                                                                                                       
-#environmental variables
+##environmental variables ----
       #0. No1.have9.NA
       combined_tbcs_data$proximity_incinerator
       #0. No1. Yes, we burn incense on festivals or on the first and fifteenth day of the lunar month.2. Yes, I burn incense almost every morning and evening.3.Yes, I burn incense almost every day from morning till night.9.Not applicable, unknown, unclear, don’t remember, don’t know, can’t say, refuse to answer or indicate with “?”
