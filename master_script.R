@@ -8,14 +8,14 @@
   source("C:/Users/msara/OneDrive/Documents/NTU GHP/Thesis/Data/Outcome_tbcs-simulated/tbcs_tidy_data_missing_values_iv.R") #data_missing_values scripts all deal with NAs, the iv script includes codes for missing values and values for probiotic
   source("C:/Users/msara/OneDrive/Documents/NTU GHP/Thesis/Data/Outcome_tbcs-simulated/tbcs_tidy_data_missing_values_dv.R")  
   source("C:/Users/msara/OneDrive/Documents/NTU GHP/Thesis/Data/Outcome_tbcs-simulated/tbcs_tidy_data_missing_values_demographic_covariates_confounders.R")
-  
+  source("C:/Users/msara/OneDrive/Documents/NTU GHP/Thesis/Data/Outcome_tbcs-simulated/tbcs_tidy_data_values_dv.R")  
+
   #stats
 
 
 #In-Progress----
   
   #data cleaning
-  source("C:/Users/msara/OneDrive/Documents/NTU GHP/Thesis/Data/Outcome_tbcs-simulated/tbcs_tidy_data_values_dv.R")
   source("C:/Users/msara/OneDrive/Documents/NTU GHP/Thesis/Data/Outcome_tbcs-simulated/tbcs_tidy_data_values_demographic_covariates_confounders.R")  
 
   #stats
