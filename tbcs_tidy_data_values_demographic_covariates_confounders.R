@@ -25,7 +25,7 @@
                   7
 ##maternal variables ----
       #integer or NA
-      combined_tbcs_data$maternal_age
+  mean_mom_age <- mean(combined_tbcs_data$maternal_age)
       #1. Junior high school and below 2. Senior high school 3. College and above, NA
       combined_tbcs_data$maternal_edu
       #integer or NA
