@@ -22,31 +22,36 @@
 #single vs twins
   #1. Single pregnancy 2. Twin pregnancy or more, NA, 9      
   single_baby_total <- sum(combined_tbcs_data$birth_type == "1", na.rm = TRUE)
-                  7
+                  
 ##maternal variables ----
-      #integer or NA
-  mean_mom_age <- mean(combined_tbcs_data$maternal_age)
-      #1. Junior high school and below 2. Senior high school 3. College and above, NA
-      combined_tbcs_data$maternal_edu
-      #integer or NA
-      combined_tbcs_data$exlcusively_breastfeeding_days
-      #0. No1.have9.NA
-      combined_tbcs_data$mother_smoking_status_before_pregnancy
-      #0. No1.have9.NA
-      combined_tbcs_data$father_smoking_status_before_pregnancy
-      #0. No1.have9.NA
-      combined_tbcs_data$mother_smoking_status_first_trimester
-      #0. No1.have9.NA
-      combined_tbcs_data$father_smoking_status_first_trimester
-                                                            
-      #0. No1.have9.NA                                 
-      combined_tbcs_data$mother_smoking_status_second_trimester
-      #0. No1.have9.NA      
-      combined_tbcs_data$father_smoking_status_second_trimester
-      #0. No1.have9.NA 
-      combined_tbcs_data$mother_smoking_status_now
-      #0. No1.have9.NA 
-      combined_tbcs_data$father_smoking_status_now
+
+#mom's age
+  #integer or NA
+  mean_mom_age <- mean(combined_tbcs_data$maternal_age, na.rm = TRUE)
+#mom's education  
+  #1. Junior high school and below 2. Senior high school 3. College and above, NA
+  high_school_and_above <- sum(combined_tbcs_data$maternal_edu == "2", na.rm = TRUE) + 
+                              sum(combined_tbcs_data$maternal_edu == "3", na.rm = TRUE)
+#breastfeeding
+  #integer or NA
+  mean_days_breastfeeding <- mean(combined_tbcs_data$exlcusively_breastfeeding_days, na.rm = TRUE)
+#smoking - mom and dad 
+  #0. No1.have9.NA
+  mom_smoked_before_pregnancy <- sum(combined_tbcs_data$mother_smoking_status_before_pregnancy == "1", na.rm = TRUE)
+  #0. No1.have9.NA
+  dad_smoked_before_pregnancy <- sum(combined_tbcs_data$father_smoking_status_before_pregnancy == "1", na.rm = TRUE)
+  #0. No1.have9.NA
+  mom_smoked_first_tri <- sum(combined_tbcs_data$mother_smoking_status_first_trimester == "1", na.rm = TRUE)
+  #0. No1.have9.NA
+  dad_smoked_first_tri <- sum(combined_tbcs_data$father_smoking_status_first_trimester == "1", na.rm = TRUE)
+  #0. No1.have9.NA                                 
+  mom_smoked_second_tri <- sum(combined_tbcs_data$mother_smoking_status_second_trimester == "1", na.rm = TRUE)
+  #0. No1.have9.NA      
+  dad_smoked_second_tri <- sum(combined_tbcs_data$father_smoking_status_second_trimester == "1", na.rm = TRUE)
+  #0. No1.have9.NA 
+  mom_smokes_now <- sum(combined_tbcs_data$mother_smoking_status_now == "1", na.rm = TRUE)
+  #0. No1.have9.NA 
+  dad_smokes_now <- sum(combined_tbcs_data$father_smoking_status_now == "1", na.rm = TRUE)
       #0. No1.have9.NA       
       combined_tbcs_data$mother_alcohol_consumption_during_pregnancy
       #0. No1.have9.NA      
