@@ -52,17 +52,27 @@
   mom_smokes_now <- sum(combined_tbcs_data$mother_smoking_status_now == "1", na.rm = TRUE)
   #0. No1.have9.NA 
   dad_smokes_now <- sum(combined_tbcs_data$father_smoking_status_now == "1", na.rm = TRUE)
-      #0. No1.have9.NA       
-      combined_tbcs_data$mother_alcohol_consumption_during_pregnancy
-      #0. No1.have9.NA      
-      combined_tbcs_data$mother_alcohol_consumption_now_over_3x_per_week
-      #1. 3 Less than 10,000 yuantwenty three10,000 yuan～5 Less than 10,000 yuan3. 510,000 yuan～7 Less than 10,000 yuan4. 710,000 yuan～10 Less than 10,000 yuan5. 1010,000 yuan～15 Less than 10,000 yuan6. 1510,000 yuan～20 Less than 10,000 yuan7. 20 More than 10,000 yuan99.Unknown, unclear, don't remember, don't know, can't say, refuse to answer or indicate with "?"      
-      combined_tbcs_data$average_monthly_income_past_year
-                                                                                                      
-                                                                                                      
+
+#alcohol - mom
+  #0. No1.have9.NA       
+  mom_alcohol_during_preganacy <- sum(combined_tbcs_data$mother_alcohol_consumption_during_pregnancy == "1", na.rm = TRUE)
+  #0. No1.have9.NA      
+  mom_alcohol_more_than_3x_week <- sum(combined_tbcs_data$mother_alcohol_consumption_now_over_3x_per_week =="1", na.rm = TRUE)
+      
+#income
+  #1. 3 Less than 10,000 yuantwenty three10,000 yuan～5 Less than 10,000 yuan3. 510,000 yuan～7 Less than 10,000 yuan4. 710,000 yuan～10 Less than 10,000 yuan5. 1010,000 yuan～15 Less than 10,000 yuan6. 1510,000 yuan～20 Less than 10,000 yuan7. 20 More than 10,000 yuan99.Unknown, unclear, don't remember, don't know, can't say, refuse to answer or indicate with "?"      
+  monthly_income_below_median <- sum(combined_tbcs_data$average_monthly_income_past_year == "1", na.rm = TRUE) +
+                                    sum(combined_tbcs_data$average_monthly_income_past_year == "2", na.rm = TRUE)
+  monthly_income_below_median <- sum(combined_tbcs_data$average_monthly_income_past_year == "3", na.rm = TRUE) +
+                                    sum(combined_tbcs_data$average_monthly_income_past_year == "4", na.rm = TRUE) +
+                                      sum(combined_tbcs_data$average_monthly_income_past_year == "5", na.rm = TRUE) +
+                                        sum(combined_tbcs_data$average_monthly_income_past_year == "6", na.rm = TRUE) +
+                                          sum(combined_tbcs_data$average_monthly_income_past_year == "7", na.rm = TRUE)
+
 ##environmental variables ----
-      #0. No1.have9.NA
-      combined_tbcs_data$proximity_incinerator
-      #0. No1. Yes, we burn incense on festivals or on the first and fifteenth day of the lunar month.2. Yes, I burn incense almost every morning and evening.3.Yes, I burn incense almost every day from morning till night.9.Not applicable, unknown, unclear, don’t remember, don’t know, can’t say, refuse to answer or indicate with “?”
-      combined_tbcs_data$incense_burning_at_home
-                                                                                                                  
+  #0. No1.have9.NA
+  incinerator <- sum(combined_tbcs_data$proximity_incinerator == "1", na.rm = TRUE)
+  #0. No1. Yes, we burn incense on festivals or on the first and fifteenth day of the lunar month.2. Yes, I burn incense almost every morning and evening.3.Yes, I burn incense almost every day from morning till night.9.Not applicable, unknown, unclear, don’t remember, don’t know, can’t say, refuse to answer or indicate with “?”
+  burn_incense_at_home <- sum(combined_tbcs_data$incense_burning_at_home == "1", na.rm = TRUE) +
+                            sum(combined_tbcs_data$incense_burning_at_home == "2", na.rm = TRUE) +
+                              sum(combined_tbcs_data$incense_burning_at_home == "3", na.rm = TRUE)
