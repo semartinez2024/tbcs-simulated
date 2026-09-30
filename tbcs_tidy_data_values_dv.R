@@ -39,7 +39,7 @@ combined_tbcs_data <- combined_tbcs_data %>%
   mutate(month_age_milestone_drink_from_cup_with_both_hands = case_when(month_age_milestone_drink_from_cup_with_both_hands >= drink_milestone_90 ~ "0",
                                                        month_age_milestone_drink_from_cup_with_both_hands <= drink_milestone_90 ~ "1"))
 
-#find proportions of delayed-----
+#find proportions of NOT MET (i.e. 0s or DELAYED) and MET (i.e. 1s or ACHIEVED)-----
 proportions(table(combined_tbcs_data$month_age_of_milestone_achievement))
 proportions(table(combined_tbcs_data$month_age_milestone_walk_steadily))
 proportions(table(combined_tbcs_data$month_age_milestone_clapping))
@@ -48,3 +48,5 @@ proportions(table(combined_tbcs_data$month_age_milestone_wave_goodbye))
 proportions(table(combined_tbcs_data$month_age_milestone_call_a_parent))
 proportions(table(combined_tbcs_data$month_age_milestone_will_come_when_called))
 proportions(table(combined_tbcs_data$month_age_milestone_drink_from_cup_with_both_hands))
+
+#label the proportions as "MET" and "NOT MET"
